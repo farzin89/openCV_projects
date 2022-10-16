@@ -7,10 +7,15 @@ pointsList = []
 # get the mouse point
 def mousePoints(event,x,y,flags,params):
     if event == cv2.EVENT_LBUTTONDOWN:
+        # draw the line
+        size = len(pointsList)
+        if size != 0 and size % 3 !=0:
+            cv2.line(img,tuple(pointsList[round((size-1)/3)*3]),(x,y),(0,0,255),2)
         # store all the point that we click on
         cv2.circle(img,(x,y),5,(0,0,255),cv2.FILLED)
         pointsList.append([x,y])
-        #print(pointsList)
+
+
 def gradient(pt1,pt2):
     return(pt2[1] - pt1[1])/(pt2[0]-pt1[0])
 
@@ -21,7 +26,9 @@ def getAngle(pointsList):
     m2 = gradient(pt1,pt3)
     angR = math.atan((m2 - m1)/(1+(m2*m1)))
     angD = round(math.degrees(angR))
-    print(angD)
+
+    # display angle
+    cv2.putText(img,str(angD),(pt1[0]-40,pt1[1]-20),cv2.FONT_HERSHEY_COMPLEX,1.5,(0,0,255),2)
 
 
 
