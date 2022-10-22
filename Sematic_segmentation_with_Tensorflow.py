@@ -30,7 +30,7 @@ for j in range(len(masks)):
 
     class_id = bbox[1]
     score = bbox[2]
-    
+
 
 
 
