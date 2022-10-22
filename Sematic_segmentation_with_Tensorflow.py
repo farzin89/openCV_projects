@@ -1,3 +1,5 @@
+import random
+
 import cv2
 import os
 
@@ -10,7 +12,7 @@ cfg_path = ''
 weight_path = ''
 class_names_path = ''
 
-img_path ='cat.png'
+img_path ='cat_and_dog.png.png'
 
 # 2 load image
 img = cv2.imread(img_path)
@@ -22,6 +24,7 @@ blob = cv2.dnn.blobFromImage(img)
 # get mask
 boxes,masks = get_detection(net,blob)
 # 6 draw masks
+colors = [(random.randint(0,255),random.randint(0,255),random.randint(0,255)) for j in range(90)]
 empty_img= np.zeros((H,W,C))
 detection_th = 0.5
 for j in range(len(masks)):
@@ -38,16 +41,23 @@ for j in range(len(masks)):
 
         mask = mask[int(class_id)]
         mask = cv2.resize(mask,(x2-x1,y2-y1))
+
+        _,mask = cv2.threshold(mask,0.5,1,cv2.THRESH_BINARY)
+
+
         for c in range(3):
-            empty_img[y1:y2,x1:x2,c] = mask
+            empty_img[y1:y2,x1:x2,c] = mask * colors[int(class_id)][c]
 
 
         print(bbox.shape)
         print(mask.shape)
 
 # 7 visualization
+overlay = ((0.6 * empty_img) + (0.4 * img)).astype("uint18")
 cv2.imshow('mask', empty_img)
 cv2.imshow('img', img)
+cv2.imshow('overlay',overlay)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
