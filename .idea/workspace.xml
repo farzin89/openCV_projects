@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d090483c-1ac2-4f75-bb94-b074ea94fac4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Sematic_segmentation_with_Tensorflow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sematic_segmentation_with_Tensorflow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class.names" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object_detection_yolo3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pexels-diana-huggins-615369.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yolov3.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
