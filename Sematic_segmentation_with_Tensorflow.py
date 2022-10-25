@@ -18,11 +18,11 @@ img_path ='cat_and_dog.png.png'
 img = cv2.imread(img_path)
 H,W,C= img.shape
 # 3 load model
-net = cv2.dnn.readNetFromTensorflow(weight_path,cfg_path)
+net1 = cv2.dnn.readNetFromTensorflow(weight_path,cfg_path)
 # 4 convert image
 blob = cv2.dnn.blobFromImage(img)
 # get mask
-boxes,masks = get_detection(net,blob)
+boxes,masks = get_detection(net1,blob)
 # 6 draw masks
 colors = [(random.randint(0,255),random.randint(0,255),random.randint(0,255)) for j in range(90)]
 empty_img= np.zeros((H,W,C))
