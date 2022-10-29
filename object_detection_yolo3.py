@@ -36,7 +36,7 @@ scores = []
 for detection in detections:
     #[x1,x2,x3,x4,x5,x6,...,xN]
     bbox = detection[:4]
-    # finding the bonding boxes located
+    # finding the bonding boxes location
     xc,yc,w,h = bbox
     bbox = [int(xc * W),int(yc*H),int(w*W),int(h*H)]
     print(bbox)
