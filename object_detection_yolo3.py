@@ -4,6 +4,7 @@ import numpy as np
 #define constants
 import cv2
 import util2
+import matplotlib.pyplot as plt
 
 model_cfg_path = os.path.join("yolov3.cfg")
 model_weight_path = os.path.join("darknet53.conv.74")
@@ -20,6 +21,8 @@ with open (class_name_path,'r') as f:
 net= cv2.dnn.readNetFromDarknet(model_cfg_path,model_weight_path)
 #load image
 img =cv2.imread(img_path)
+
+H,W,_ = img.shape
 #convert image
 blob = cv2.dnn.blobFromImage(img,1/255,(320,320),(0,0,0),True)
 
@@ -33,8 +36,14 @@ scores = []
 for detection in detections:
     #[x1,x2,x3,x4,x5,x6,...,xN]
     bbox = detection[:4]
-
+    # finding the bonding boxes located
+    xc,yc,w,h = bbox
+    bbox = [int(xc * W),int(yc*H),int(w*W),int(h*H)]
     print(bbox)
+
+
+
+
     bbox_confidence =detection[4]
 
     class_id= np.argmax(detection[5:])
@@ -44,7 +53,10 @@ for detection in detections:
     class_ids.append(class_id)
     scores.append(score)
 
-    break
 
-#for bbox in bboxes:
-#    img = util2.draw(bbox,img)
+
+for bbox in bboxes:
+    img = util2.draw(bbox,img)
+
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.show()
