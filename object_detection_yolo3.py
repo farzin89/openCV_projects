@@ -53,7 +53,9 @@ for detection in detections:
     class_ids.append(class_id)
     scores.append(score)
 
+# apply nms (take all the detections and remove the unnecessary one)
 
+bboxes,class_id,score = util2.NMS(bboxes,class_ids,scores)
 
 for bbox in bboxes:
     img = util2.draw(bbox,img)
