@@ -39,7 +39,7 @@ for detection in detections:
     # finding the bonding boxes location
     xc,yc,w,h = bbox
     bbox = [int(xc * W),int(yc*H),int(w*W),int(h*H)]
-    print(bbox)
+
 
 
 
@@ -57,8 +57,21 @@ for detection in detections:
 
 bboxes,class_id,score = util2.NMS(bboxes,class_ids,scores)
 
-for bbox in bboxes:
-    img = util2.draw(bbox,img)
+# plot
+for bbox_,bbox in enumerate(bboxes):
+    xc,yc,w,h =bbox
+
+    cv2.putText(img,
+                class_names[class_ids[bbox_]],
+                (int(xc - (w / 2)), int(yc + (h / 2) - 20)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                7,
+                (0, 255, 0),
+                15)
+    img = cv2.rectangle(img,
+                        (int(xc - (w/2)),int(yc -(h/2))),
+                        (int(xc +(w/2)),int(yc +(h/2))),(0,255,0),10)
+
 
 plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.show()
