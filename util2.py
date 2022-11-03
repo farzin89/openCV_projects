@@ -50,3 +50,15 @@ def NMS(boxes,class_ids,confidences,overlapThresh = 0.5):
             indices = indices[indices!=i]
         # return only the boxes at the remaining indices
     return boxes[indices], class_ids[indices], confidences[indices]
+
+def get_limits(color):
+    c =np.uint8([[color]]) # here insert the BGR values which you want to convert to HSV
+    hsvC = cv2.cvtColor(c,cv2.COLOR_BGR2HSV)
+
+    lowerLimit = hsvC[0][0][0] -10,100,100
+    upperLimit = hsvC[0][0][0] + 10,255,255
+
+    lowerLimit = np.array(lowerLimit,dtype=np.uint8)
+    upperLimit = np.array(upperLimit,dtype=np.uint8)
+
+    return lowerLimit,upperLimit
